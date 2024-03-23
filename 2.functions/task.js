@@ -24,12 +24,18 @@ function summElementsWorker(...arr) {
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
   }
-  
+
   return sum;
 }
 
 function differenceMaxMinWorker(...arr) {
-
+  let max = 0;
+  let min = 0;
+  if (arr.length > 0) {
+    max = Math.max(...arr);
+    min = Math.min(...arr);
+  }
+  return (max - min); 
 }
 
 function differenceEvenOddWorker(...arr) {
