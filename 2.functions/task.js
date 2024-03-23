@@ -65,7 +65,7 @@ function averageEvenElementsWorker(...arr) {
       countEvenElement++;
     }
   }
-  
+
   if (countEvenElement != 0) {
     return (sumEvenElement / countEvenElement);
   }
@@ -75,5 +75,13 @@ function averageEvenElementsWorker(...arr) {
 }
 
 function makeWork (arrOfArr, func) {
-
+  let maxWorkerResult = -Infinity;
+  let valueFromFunc;
+  for (let i = 0; i < arrOfArr.length; i++) {
+    valueFromFunc = func(...arrOfArr[i]);
+    if (valueFromFunc > maxWorkerResult) {
+      maxWorkerResult = valueFromFunc
+    } 
+  }
+  return maxWorkerResult;
 }
