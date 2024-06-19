@@ -7,7 +7,7 @@ class PrintEditionItem {
         this.type = null;
     }
 
-    fix() { 
+    fix() {
         this.state *= 1.5;
     }
 
@@ -59,5 +59,67 @@ class DetectiveBook extends Book {
     constructor(...args) {
         super(...args);
         this.type = "detective";
+    }
+}
+
+class Library {
+    constructor(name) {
+        this.name = name;
+        this.books = [];
+    }
+    
+    addBook(book) {
+        if (book.state > 30) {
+            this.books.push(book);
+        }
+    }
+
+    findBookBy(type, value) {
+        for (let book of this.books) {
+            if(book[type] === value) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    giveBookByName(bookName) {
+        for (let book of this.books) {
+            if(book.name === bookName) {
+                this.books = this.books.filter((book) => book.name != bookName);
+                return book;
+            }
+        }
+        return null;
+    }
+}
+
+class Student {
+    constructor(name) {
+        this.name = name;
+        this.marks = {};
+    }
+
+    addMark(mark, subject) {
+        if(mark >= 2 && mark <= 5) {
+            if(this.marks.hasOwnProperty(subject)) {
+                this.marks[subject].push(mark);
+            } else {
+                this.marks[subject] = [mark];
+            }
+        }
+    }
+
+    getAverageBySubject(subject) {
+        return this.marks.hasOwnProperty(subject) ? this.marks[subject].reduce((acc, mark) => acc + mark, 0) / this.marks[subject].length :  0;
+    }
+
+    getAverage() {
+        let subjects = Object.keys(this.marks);
+        let sumOfAverageMarks = 0;
+        for (let subject of Object.keys(this.marks)) {
+            sumOfAverageMarks += this.getAverageBySubject(subject);            
+        }
+        return sumOfAverageMarks > 0 ? sumOfAverageMarks / subjects.length : 0; 
     }
 }
