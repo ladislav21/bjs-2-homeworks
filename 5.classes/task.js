@@ -7,7 +7,7 @@ class PrintEditionItem {
         this.type = null;
     }
 
-    fix() {
+    fix() { 
         this.state *= 1.5;
     }
 
