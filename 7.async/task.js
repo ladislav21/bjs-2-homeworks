@@ -7,15 +7,15 @@ class AlarmClock {
     addClock(time, callback) {
         if (!time || !callback) {
             throw new Error('Отсутствуют обязательные аргументы');
-        } else if (this.alarmCollection.some((element) => element === time)) {
+        } else if (this.alarmCollection.some((element) => element.time === time)) {
             console.warn('Уже присутствует звонок на это же время');
-        } else {
-            this.alarmCollection.push({
-                callback,
-                time: time,
-                canCall: true,
-            });
         }
+        
+        this.alarmCollection.push({
+            callback,
+            time: time,
+            canCall: true,
+        });
     }
 
     removeClock(time) {
@@ -23,16 +23,11 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime() {
-        function addZeroToTime(value) {
-            if(value < 10) {
-                return ("0" + value);
-            } else {
-                return value;
-            }
-        }
-        
-        const currentDate = new Date();
-        return (addZeroToTime(currentDate.getHours()) + ":" + addZeroToTime(currentDate.getMinutes()));
+        var currentTime = new Date().toLocaleTimeString("ru-Ru", {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+        return currentTime;
     }
 
     start() {
